@@ -34,18 +34,49 @@ You should print out the following:
 12
 */
 
-cosnt spiral = (yourArrays) => {
-  
+//Note: It is possible that the matrix is a rectangle (non-square)
+
+const spiral = (yourArrays) => {
+  let output = [];
+  let copied = yourArrays.slice()  //Non-mutate original array
+  for ( i = 0; i < copied[0].length; i++ ) {
+    output.push(copied[0][i])
+  }
+  for ( i = 1; i < copied.length; i ++ ) {
+    output.push(copied[i][copied[i].length-1])
+  }
+  for ( i = copied[copied.length-1].length-2; i >= 0; i-- ){
+    output.push(copied[copied.length-1][i])
+  }
+  for ( i = copied.length-2; i >= 1; i-- ) {
+    output.push(copied[i][0])
+  }
+  copied.shift()
+  copied.pop()
+  for ( i = 0; i < copied.length; i ++ ) {
+    copied[i].pop()
+  }
+  for ( i = copied.length-1; i >= 0; i-- ) {
+    copied[i].shift()
+  }
+  console.log(copied)
+  // console.log('output: ', output)
+  if (copied.length != 0) {
+    output.push(...spiral(copied))
+  }
+  return output;
 }
 
 
 const test1 = 
-[[1,2,3,4,5],
+[
+[1,2,3,4,5],
 [6,7,8,9,10],
 [11,12,13,14,15],
-[16,17,18,19,20],
-[21,22,23,24,25]
-]]
+[16,17,18,19,20]
+]
+
+console.log(spiral(test1))
 
 $(document).ready(function() {
 
