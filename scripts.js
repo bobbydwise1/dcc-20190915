@@ -83,11 +83,10 @@ $(document).ready(function() {
   $('#form1').submit(function(){
     event.preventDefault()
     input1 = $('#input-1').val()
-    input1 = parseInt(input1)
-    input2 = $('#input-2').val()
-    input2 = parseInt(input2)
-    console.log(input1, input2)
-    $('#output-1').text(input1,input2)
+    input1 = input1.replace(/\'/g,'"')
+    input2 = JSON.parse(input1)
+    console.log(input1)
+    $('#output-1').text(spiral(input2))
   })
 
 });
